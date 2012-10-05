@@ -1,4 +1,4 @@
-oled.d oled.o: .././oled.c .././oled.h .././globals.h \
+spi.d spi.o: .././spi.c .././spi.h .././globals.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/../../../../avr/include/avr/io.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/../../../../avr/include/avr/sfr_defs.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/../../../../avr/include/inttypes.h \
@@ -17,10 +17,9 @@ oled.d oled.o: .././oled.c .././oled.h .././globals.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/include/stddef.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/../../../../avr/include/avr/interrupt.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/../../../../avr/include/stdlib.h \
- .././adc.h .././joy.h .././uart.h .././spi.h .././font_5x7.h \
- c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/../../../../avr/include/avr/pgmspace.h
+ .././adc.h .././joy.h .././uart.h .././oled.h
 
-.././oled.h:
+.././spi.h:
 
 .././globals.h:
 
@@ -66,8 +65,4 @@ c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1
 
 .././uart.h:
 
-.././spi.h:
-
-.././font_5x7.h:
-
-c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/../../../../avr/include/avr/pgmspace.h:
+.././oled.h:

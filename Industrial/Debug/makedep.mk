@@ -10,6 +10,8 @@ joy.c
 
 oled.c
 
+spi.c
+
 uart.c
 
 utils.c

@@ -92,7 +92,6 @@ void printHelp(){
 
 int main(void)
 {
-	
 	initUART(UBBR);
 	printf("Simple RAM TEST \r\n");
 	initExtMemIface();
@@ -101,8 +100,18 @@ int main(void)
 	SRAM_test();
 	joyInit();
 	initOLED();
+	initSPI();
+    //setClockSpeedSPI();
+	//while(1) writeSPI(0x55);
+	/*while(1) {
+		writeSPI(0xA0); //Read Status
+		readSPI();
+        //printf("SPI returns status Dec: %d Hex: %x \r\n", readSPI(), readSPI());
+	}*/
+	
 	struct joypos_t c;
 	enum joydir_t d;
+	
 	
 	 while(1){
 		if (readControl) {
@@ -139,10 +148,32 @@ int main(void)
 			}
 		}
 
-//DO SOMETHING ELSE        
-// 		printf ("Joystick Reads X: %d    Y: %d \n\r",c.x,c.y);
-// 		printdir(d);
-// 		_delay_ms(1000);
+//DO SOMETHING ELSE
+		uint8_t resultSPI;        
+ 		/*printf("SPI TEST \r\n");
+ 		writeSPI(0xA0); //Read Status
+		resultSPI = readSPI();*/
+		 
+		
+		 
+		//printf("SPI returns status Hex: %x \r\n",readCANCTL());
+		/*for (resultSPI = 0; resultSPI < 3; resultSPI++){
+			switch(resultSPI){
+				case 0:
+					writeSPI(0x00);
+					break;
+				case 1:
+					writeSPI(0x55);
+					break;
+				case 2:
+					writeSPI(0xFF);
+					break;
+			}
+			
+		}*/
+		
+		
+
 		
 		
 	}

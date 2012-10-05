@@ -48,6 +48,7 @@ C_SRCS +=  \
 ../Industrial.c \
 ../joy.c \
 ../oled.c \
+../spi.c \
 ../uart.c \
 ../utils.c
 
@@ -63,6 +64,7 @@ adc.o \
 Industrial.o \
 joy.o \
 oled.o \
+spi.o \
 uart.o \
 utils.o
 
@@ -72,6 +74,7 @@ adc.o \
 Industrial.o \
 joy.o \
 oled.o \
+spi.o \
 uart.o \
 utils.o
 
@@ -81,6 +84,7 @@ adc.d \
 Industrial.d \
 joy.d \
 oled.d \
+spi.d \
 uart.d \
 utils.d
 
@@ -90,6 +94,7 @@ adc.d \
 Industrial.d \
 joy.d \
 oled.d \
+spi.d \
 uart.d \
 utils.d
 
@@ -121,6 +126,8 @@ ADDITIONAL_DEPENDENCIES:= $(HEX_FLASH_FILE_PATH) $(LSS_FILE_PATH) $(HEX_EEPROM_F
 OUTPUT_FILE_DEP:= ./makedep.mk
 
 # AVR/GNU C Compiler
+
+
 
 
 

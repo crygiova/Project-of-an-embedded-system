@@ -17,7 +17,7 @@ utils.d utils.o: .././utils.c .././utils.h .././globals.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/include/stddef.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/../../../../avr/include/avr/interrupt.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/../../../../avr/include/stdlib.h \
- .././adc.h .././joy.h .././uart.h .././oled.h
+ .././adc.h .././joy.h .././uart.h .././oled.h .././spi.h
 
 .././utils.h:
 
@@ -66,3 +66,5 @@ c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1
 .././uart.h:
 
 .././oled.h:
+
+.././spi.h:

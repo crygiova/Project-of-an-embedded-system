@@ -11,6 +11,7 @@
 
 
 #define F_CPU 4915200UL
+//#define F_CPU 2000000UL
 #define BAUD 9600
 #define UBBR 31
 
@@ -26,7 +27,7 @@
 #include "joy.h"
 #include "uart.h"
 #include "oled.h"
-
+#include "spi.h"
 
 /**Porta of high addresses*/
 #define ADDRESS_LOW PORTA

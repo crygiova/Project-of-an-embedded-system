@@ -24,5 +24,5 @@ void setPWM(uint8_t pos){
 	if (t > MAX_POS) t = MAX_POS;
 	
 	OCR1B = t;
-	printf("pos = %d; OCR = %d;delta = %d; MIN: %d; MAX %d***  DELTA_POS/255 : %d \n\r",pos,OCR1A,DELTA_POS,MIN_POS,MAX_POS, DELTA_POS/255);
+	//printf("pos = %d; OCR = %d;delta = %d; MIN: %d; MAX %d***  DELTA_POS/255 : %d \n\r",pos,OCR1A,DELTA_POS,MIN_POS,MAX_POS, DELTA_POS/255);
 }

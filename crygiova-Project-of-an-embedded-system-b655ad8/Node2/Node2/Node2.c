@@ -14,6 +14,13 @@
 
 #include "globals.h"
 
+
+
+ISR(ADC_vect){
+	ADCReady = 1;
+}
+
+
 ISR(INT4_vect) //Interrupt routine for the CAN Transciver
 {
 	uint8_t mcp_flags;
@@ -70,10 +77,12 @@ void initInterrupts(){
 // 	GICR |= (1<<INT2); 
 //TODO: Configure to our interrupts
 	DDRE &= ~(1<<PE4); //Set PE5 as Input
+	DDRF &= (1<<PF1); //Set PF1 as output
 	PORTD |= (1<<PE4); //Set pullup for PE5
 	EICRB |= (1<<ISC41);
 	EICRB &= ~(1<<ISC40); //Set interrupts on falling edge at PE5
 	EIMSK |= (1<<INT4); //Enable interrupt on PE5
+	initADC();
 	sei();
 }
 
@@ -139,7 +148,18 @@ int main(void)
 					setPWM(current.data[0]);
 					break;
 			}
-		}	  		
+		}
+		
+		//Checking for GOAL
+		volatile short temp = averageADC(5);
+		if(temp < 10) {
+		printf("GOAAAAALs: %d \r\n",score);
+		shot();
+		
+			
+		}
+		
+		
 		
 // 	    m2s.id = 24;
 // 		m2s.size = 5;
@@ -152,9 +172,8 @@ int main(void)
 // 		fillTxBufferMCP(2,m2s);
 // 		requestToSendMCP(2);
 	
-	_delay_ms(50);
+	
 	
 	}
 	
-	_delay_ms(50);
 }

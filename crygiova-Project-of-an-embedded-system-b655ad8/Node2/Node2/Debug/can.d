@@ -1,4 +1,4 @@
-pwm.d pwm.o: .././pwm.c .././pwm.h .././globals.h \
+can.d can.o: .././can.c .././can.h .././spi.h .././globals.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/../../../../avr/include/avr/io.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/../../../../avr/include/avr/sfr_defs.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/../../../../avr/include/inttypes.h \
@@ -17,9 +17,11 @@ pwm.d pwm.o: .././pwm.c .././pwm.h .././globals.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/include/stddef.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/../../../../avr/include/avr/interrupt.h \
  c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1/../../../../avr/include/stdlib.h \
- .././uart.h .././spi.h .././can.h
+ .././uart.h .././pwm.h .././adc.h
 
-.././pwm.h:
+.././can.h:
+
+.././spi.h:
 
 .././globals.h:
 
@@ -61,6 +63,6 @@ c:\program\ files\atmel\avr\ studio\ 5.0\avr\ toolchain\bin\../lib/gcc/avr/4.5.1
 
 .././uart.h:
 
-.././spi.h:
+.././pwm.h:
 
-.././can.h:
+.././adc.h:

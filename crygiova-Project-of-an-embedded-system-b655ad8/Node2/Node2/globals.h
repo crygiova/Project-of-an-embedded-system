@@ -27,9 +27,12 @@
 #include "spi.h"
 #include "can.h"
 #include "pwm.h"
+#include "adc.h"
 
 extern volatile uint8_t flagMCP; 
 
+#define shot() PORTF |= (1 << PF1);
+#define reload() PORTF &= ~(1 << PF1);
 
 struct joypos_t {  //Structure to keep joystick positions
 	uint8_t x;
@@ -41,5 +44,6 @@ enum joydir_t {LEFT_BOTTOM, LEFT_TOP, RIGHT_BOTTOM, RIGHT_TOP,TOP, BOTTOM, LEFT,
 
 extern struct joypos_t mPoint; //Keeps central point
 
+extern int score;
 
 #endif /* GLOBALS_H_ */

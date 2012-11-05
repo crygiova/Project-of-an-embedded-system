@@ -44,6 +44,7 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../adc.c \
 ../can.c \
 ../Node2.c \
 ../pwm.c \
@@ -58,6 +59,7 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+adc.o \
 can.o \
 Node2.o \
 pwm.o \
@@ -66,6 +68,7 @@ uart.o
 
 
 OBJS_AS_ARGS +=  \
+adc.o \
 can.o \
 Node2.o \
 pwm.o \
@@ -74,6 +77,7 @@ uart.o
 
 
 C_DEPS +=  \
+adc.d \
 can.d \
 Node2.d \
 pwm.d \
@@ -82,6 +86,7 @@ uart.d
 
 
 C_DEPS_AS_ARGS +=  \
+adc.d \
 can.d \
 Node2.d \
 pwm.d \
@@ -116,6 +121,8 @@ ADDITIONAL_DEPENDENCIES:= $(HEX_FLASH_FILE_PATH) $(LSS_FILE_PATH) $(HEX_EEPROM_F
 OUTPUT_FILE_DEP:= ./makedep.mk
 
 # AVR/GNU C Compiler
+
+
 
 
 

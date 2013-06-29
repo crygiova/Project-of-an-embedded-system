@@ -22,7 +22,6 @@ void initOLED(); //Inits OLED at ???
 void putcOLED(char c);
 void putsOLED(char* s);
 
-
 void invertModeOLED();
 void normalModeOLED();
 

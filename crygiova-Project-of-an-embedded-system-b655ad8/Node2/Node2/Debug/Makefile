@@ -47,8 +47,10 @@ C_SRCS +=  \
 ../adc.c \
 ../can.c \
 ../Node2.c \
+../position.c \
 ../pwm.c \
 ../spi.c \
+../TWI_Master.c \
 ../uart.c
 
 
@@ -62,8 +64,10 @@ OBJS +=  \
 adc.o \
 can.o \
 Node2.o \
+position.o \
 pwm.o \
 spi.o \
+TWI_Master.o \
 uart.o
 
 
@@ -71,8 +75,10 @@ OBJS_AS_ARGS +=  \
 adc.o \
 can.o \
 Node2.o \
+position.o \
 pwm.o \
 spi.o \
+TWI_Master.o \
 uart.o
 
 
@@ -80,8 +86,10 @@ C_DEPS +=  \
 adc.d \
 can.d \
 Node2.d \
+position.d \
 pwm.d \
 spi.d \
+TWI_Master.d \
 uart.d
 
 
@@ -89,8 +97,10 @@ C_DEPS_AS_ARGS +=  \
 adc.d \
 can.d \
 Node2.d \
+position.d \
 pwm.d \
 spi.d \
+TWI_Master.d \
 uart.d
 
 
@@ -121,6 +131,10 @@ ADDITIONAL_DEPENDENCIES:= $(HEX_FLASH_FILE_PATH) $(LSS_FILE_PATH) $(HEX_EEPROM_F
 OUTPUT_FILE_DEP:= ./makedep.mk
 
 # AVR/GNU C Compiler
+
+
+
+
 
 
 

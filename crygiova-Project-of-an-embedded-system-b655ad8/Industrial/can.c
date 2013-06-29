@@ -53,8 +53,7 @@ void sendCANJoy(uint8_t buffer, struct joypos_t p, enum joydir_t d){
 	message.data[1] = p.y; //Y component of the joy
 	message.data[2] = (uint8_t) d; //Direction according to the enum
 	message.data[3] = CAN_TERMINATION;
-	
-	printf ("Joy X: %d, Joy Y: %d Joy: Pos: %d \r\n", (uint8_t) message.data[0], (uint8_t) message.data[1], (uint8_t) message.data[2]);  
+
 	
 	fillTxBufferMCP(buffer,message);
 	requestToSendMCP(buffer); 

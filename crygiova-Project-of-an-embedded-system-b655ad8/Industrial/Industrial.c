@@ -122,13 +122,17 @@ int main(void)
 	
 	struct joypos_t p;
 	enum joydir_t d;
-	struct canMessage m0,m1;
+	struct canMessage m0,m1,m2s;
 
 	 while(1){
 		 
+		/* slide1Point=getSlidePosition(1);
+		 slide2Point=getSlidePosition(2);
+		 printf("SLIDE1 -> %d",slide1Point.x);
+		 printf("SLIDE2 -> %d",slide2Point.x);SLIDE READINGS*/
 		if (readControl) {
-			printf("Reading control \n");
 			readControl = 0;
+			
 			d = getJoyDirection();
 			p = getJoyPosition();
 		    sendCANJoy(2,p,d);
@@ -138,6 +142,12 @@ int main(void)
 		}
 		if (flagJoyButton) {
 		
+			m2s.id = JOY_BUTTON;
+			m2s.size = 0;
+			printf("Sending joy bu\r\n");
+			fillTxBufferMCP(0,m2s);
+			requestToSendMCP(0);
+		
 			struct canMessage m2s;
 			flagJoyButton = 0;
 			gotoCharOLED(7,0);
@@ -146,16 +156,6 @@ int main(void)
 				case 0: //Play
 					gotoCharOLED(7,0);
 					putsOLED("PLAY");
-					
-					m2s.id = 95;
-					m2s.size = 5;
-					m2s.data[0] = 'O';
-					m2s.data[1] = 'K';
-					m2s.data[2] = '4';
-					m2s.data[3] = '2';
-					m2s.data[4] = 0x00;
-					fillTxBufferMCP(0,m2s);
-					requestToSendMCP(0);
 					break;
 					
 			   case 1: //Options

@@ -68,7 +68,7 @@ ISR(INT4_vect) //Interrupt routine for the CAN Transciver
 }	
  
 void initInterrupts(){
-// 	DDRD  &= ~(1<<PD3); //Set INT1/PD3 as Input
+ 	DDRD  |= (1<<PD0) | (1 << PD1); //Set INT1/PD3 as Input
 // 	PORTD |= (1<<PD3); //Set pullup
 // 	MCUCR |= 1<<ISC11; //Set interrupt on falling edge
 // 	EMCUCR &= ~(1<<ISC2); //Set interrupt on 0 at INT2
@@ -77,25 +77,90 @@ void initInterrupts(){
 // 	GICR |= (1<<INT2); 
 //TODO: Configure to our interrupts
 	DDRE &= ~(1<<PE4); //Set PE5 as Input
-	DDRF &= (1<<PF1); //Set PF1 as output
+	DDRA |= (1 << PA7) | (1 << PA6) |(1 << PA5) | (1 << PA4) |(1 << PA3); //Set as output the needed pins in A
+	DDRC = 0x00; //Make PORTC all inputs
+	PORTC = 0x00;
+	DDRF  |= (1<<PF2); //Set PF1 as output
+	PORTF &= (~1 << PF1);
 	PORTD |= (1<<PE4); //Set pullup for PE5
 	EICRB |= (1<<ISC41);
 	EICRB &= ~(1<<ISC40); //Set interrupts on falling edge at PE5
 	EIMSK |= (1<<INT4); //Enable interrupt on PE5
 	initADC();
+	reload();
 	sei();
 }
 
+uint8_t reverse(uint8_t byte){
+	uint8_t i, reverse,temp;
+	reverse = 0;
+	for(i = 0; i < 8; i++){
+		temp = ((byte & (1 << i)) << 7-i);
+		reverse |= temp >> i;
+	}
+	return reverse;
+}
+
+// • Set !OE low to enable output of encoder
+// • Set SEL low to get high byte
+// • Wait about 20 microseconds
+// • Read MSB
+// • Set SEL high to get low byte
+// • Wait about 20 microseconds
+// • Read LSB
+// • Toggle !RST to reset encoder
+// • Set !OE high to disable output of encoder
+// • Process received data....
 
 
+
+
+void setEngineVoltageJoy(unsigned char axis){
+	char msg[3];
+	msg[0] = 0x50;
+	msg[1] = 0x00; 
+	if (abs(128-axis) > 30) {
+		enableMotor();
+		msg[2] = (abs(128-axis)-2);//;*2;
+		if (axis > 128){
+		     forwardMotor();
+//			 printf("FORWARD \r\n");	
+		} else {
+			backwardMotor();
+//			 printf("BACKWARD \r\n");	
+		}					
+		TWI_Start_Transceiver_With_Data(msg, 3);
+	}
+	else {
+		disableMotor();
+	}
+	
+}
+
+
+void setEngineVoltage(unsigned char speed){
+		char msg[3]; 
+		msg[0] = 0x50;
+		msg[1] = 0x00;
+		msg[2] = speed; 
+		TWI_Start_Transceiver_With_Data(msg, 3);
+}
 
 int main(void)
-{
+{	
 	struct canMessage m2s,rm;
 	initUART(UBBR);
+	TWI_Master_Initialise();
 	initInterrupts();
-	initSPI();
+	setReset();
+	initMotor();
+	
+	PORTA |= (1 << PA4);
 	printf("\r\n \r\n Hi, I am NODE 2 and this is NOT jackass, but we are getting there\r\n");
+
+	
+	initSPI();
+	
 	resetMCP();
 	initCAN(NORMAL);	
 	writeMCP(MCP_CANINTF, 0x01);
@@ -110,13 +175,20 @@ int main(void)
 // 		
 // 		fillTxBufferMCP(0,m2s);
 // 		requestToSendMCP(0);
-		_delay_ms(5);
+
 	
 		initPWM();
 		struct canMessage m0,m1, current;
-	
-	 while(1){
+	    int i = 0;
 		
+		 while(1){
+		 if (i > 5) {
+			printf("Read Encoder: %d \r\n", readEncoder());
+			//_delay_ms(500);
+			i = 0;
+		 }
+		 i++;		
+		 
 		//receiving
 		if(flagMCP & 1 << 0) {
 			flagMCP &= ~(1 << 0);
@@ -140,23 +212,31 @@ int main(void)
 				case JOY_MESSAGE:
 				//	printf("Joystick X: %d    Y: %d   DIR: %d \r\n", current.data[0],current.data[1],current.data[2]);
 					newCurrent = 0;
-					setPWM(current.data[0]);
+			//TODO decomment		setPWM(current.data[0]);
+					setEngineVoltageJoy(current.data[1]);
+				
 					break;
+					
+					case JOY_BUTTON:
+					shot();
+					//printf("I am shooting \r\n");
+					_delay_ms(150);
+					reload();
+					break;
+					
+					
 				default:
 					newCurrent = 0;
 					//printf ("Current CAN message ID: %d, Size: %d, Data: %s \r\n", m1.id, m1.size, m1.data);
-					setPWM(current.data[0]);
+					//setPWM(current.data[0]);
 					break;
 			}
 		}
 		
 		//Checking for GOAL
-		volatile short temp = averageADC(5);
+		volatile short temp = averageADC(10);
 		if(temp < 10) {
-		printf("GOAAAAALs: %d \r\n",score);
-		shot();
-		
-			
+		printf("GOAAAAALs: %d \r\n",score);		
 		}
 		
 		

@@ -16,7 +16,7 @@ int score=0;
 void initADC(){
 	ADMUX |=  (1 << REFS0) | (1 << REFS1); //We will be using Vcc as a + reference and chanel 0 (ADC0 / PF0)
     ADCSRA |= (1 << ADEN) |(1 << ADIE);
-	DDRF &= ~(1<<PF0); //Set PE5 as Input
+	DDRF &= ~(1<<PF0); //Set PF1 as Input
 	
 }
 
@@ -35,6 +35,7 @@ short averageADC(char times){
 	short acum = 0;
 	for ( i = 0; i < times; i++) {
 		acum+=readADC();
+		_delay_ms(5);
 	}
 	acum = acum/times;
 	if (!inScore && acum < GOAL_THRESH){

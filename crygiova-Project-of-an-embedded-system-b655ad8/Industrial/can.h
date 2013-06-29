@@ -17,6 +17,7 @@
 //Lower 10 reserved for high prio. messaging
 
 #define JOY_MESSAGE 10
+#define JOY_BUTTON 11
 
 
 

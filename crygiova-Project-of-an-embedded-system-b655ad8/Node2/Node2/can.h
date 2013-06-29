@@ -14,6 +14,7 @@
 
 
 #define JOY_MESSAGE 10
+#define JOY_BUTTON 11
 
 #define CAN_TERMINATION 0x00
 

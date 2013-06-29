@@ -8,8 +8,11 @@
 #include "globals.h"
 #include "joy.h"
 
-volatile uint8_t flagJoyButton = 0; //Initialize flag for joybutton
-struct joypos_t mPoint; //Will be initialized in runntime
+volatile uint8_t flagJoyButton = 0; //Initialize flag for joy button
+struct joypos_t mPoint; //Will be initialized in runtime
+
+struct slidepos_t slide1Point; //Will be initialized in runtime
+struct slidepos_t slide2Point; //Will be initialized in runtime
 
 
 void joyInit(){
@@ -22,6 +25,21 @@ struct joypos_t getJoyPosition(){
 	r.x = ADC_read(X_AXIS);
 	r.y = ADC_read(Y_AXIS);
 	return r;	
+}
+
+
+struct slidepos_t getSlidePosition(uint8_t number)//returns the slider position
+{
+	struct slidepos_t r;
+	if(number==1)//if number is 1 we read the first slider
+	{
+		r.x=ADC_read(L_SLIDER);
+	}
+	else//we read the second one
+	{
+		r.x=ADC_read(R_SLIDER);
+	}	
+	return r;
 }
 
 enum joydir_t getJoyDirection(){
